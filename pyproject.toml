@@ -1,0 +1,21 @@
+[project]
+name = "ai-ad-video-automation"
+version = "0.1.0"
+description = "MVP for batch AI ad copy generation and mock video-platform automation."
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi",
+    "sqlmodel",
+    "uvicorn",
+    "python-multipart",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-p no:cacheprovider"

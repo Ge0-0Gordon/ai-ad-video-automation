@@ -1,0 +1,3 @@
+video_path,brand_name,product_type,selling_points,target_audience,platform,copy_style,template_id
+sample_data/sample_video.mp4,NovaFit,Smart fitness watch,"heart-rate tracking; long battery life; sleep insights",young office workers,TikTok,energetic,TEMPLATE_FAST_01
+sample_data/sample_video.mp4,GlowTea,Herbal tea,"relaxing scent; low caffeine; gift-ready packaging",busy professionals,Instagram,warm,TEMPLATE_SOFT_02

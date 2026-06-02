@@ -1,0 +1,10 @@
+.env
+app.db
+*.db
+__pycache__/
+.pytest_cache/
+*.pyc
+artifacts/logs/*
+artifacts/screenshots/*
+!artifacts/logs/.gitkeep
+!artifacts/screenshots/.gitkeep
