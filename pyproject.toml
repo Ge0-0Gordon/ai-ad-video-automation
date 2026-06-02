@@ -5,6 +5,8 @@ description = "MVP for batch AI ad copy generation and mock video-platform autom
 requires-python = ">=3.11"
 dependencies = [
     "fastapi",
+    "langchain-core",
+    "langchain-openai",
     "sqlmodel",
     "uvicorn",
     "python-multipart",

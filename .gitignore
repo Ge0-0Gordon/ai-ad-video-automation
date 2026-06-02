@@ -3,6 +3,7 @@ app.db
 *.db
 __pycache__/
 .pytest_cache/
+pytest-cache-files-*/
 *.pyc
 artifacts/logs/*
 artifacts/screenshots/*

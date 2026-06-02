@@ -36,3 +36,16 @@ class AdCopyStructuredOutput(BaseModel):
     marketing_copy: str = Field(min_length=1, max_length=500)
     selling_point_list: list[str] = Field(min_length=1, max_length=5)
     voiceover_script: str = Field(min_length=1, max_length=1000)
+
+
+class AdCopyRead(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: int
+    task_id: int
+    title: str
+    marketing_copy: str
+    selling_point_list: str
+    voiceover_script: str
+    raw_llm_response: str
+    created_at: datetime
