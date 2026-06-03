@@ -49,3 +49,16 @@ class AdCopyRead(BaseModel):
     voiceover_script: str
     raw_llm_response: str
     created_at: datetime
+
+
+class AutomationRunRead(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: int
+    task_id: int
+    status: str
+    started_at: datetime
+    finished_at: datetime | None
+    screenshot_path: str | None
+    log_path: str | None
+    error_message: str | None

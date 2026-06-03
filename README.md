@@ -9,11 +9,11 @@ Current scope:
 - SQLite persistence through SQLModel.
 - Centralized task status transition rules.
 - Mock and OpenAI-compatible copy generation flow.
-- Pytest coverage for CSV import, copy schema, copy service, and task state.
+- Mock editing platform for Playwright submission.
+- FastAPI automation submission and retry endpoints.
+- Pytest coverage for CSV import, copy schema, copy service, task state, and automation state records.
 
 Not implemented yet:
-- Playwright automation.
-- Mock editing platform.
 - Streamlit dashboard.
 - Excel import.
 
@@ -119,6 +119,55 @@ Phase 2 acceptance criteria:
 - Invalid provider output moves the task to `COPY_FAILED`.
 - KIMI / real OpenAI-compatible mode requires `LLM_API_KEY` and does not fallback to mock.
 - Core tests pass with `conda run -n learn-a pytest`.
+
+## Phase 3 Mock Platform and Automation
+
+Install Python dependencies after pulling Phase 3:
+
+```powershell
+conda run -n learn-a pip install -e ".[dev]"
+```
+
+Install the Playwright browser used by the automation service:
+
+```powershell
+conda run -n learn-a python -m playwright install chromium
+```
+
+Start the backend in one terminal:
+
+```powershell
+conda run -n learn-a uvicorn app.main:app --reload --port 8000
+```
+
+Start the mock editing platform in a second terminal:
+
+```powershell
+conda run -n learn-a uvicorn mock_platform.main:app --reload --port 8001
+```
+
+Manual Phase 1 -> Phase 2 -> Phase 3 test:
+
+1. Open `http://localhost:8000/docs`.
+2. Use `POST /tasks/import-csv` to upload `sample_data/sample_tasks.csv`.
+3. Use `POST /copywriting/1/generate` to generate structured copy for task `1`.
+4. Open `http://localhost:8001/login` and manually verify the mock platform can log in and submit a task.
+5. Use `POST /automation/1/submit` to run Playwright against the mock platform.
+6. Confirm `GET /tasks/1` shows `status=SUBMITTED` and a non-empty `platform_job_id`.
+7. Confirm the returned automation run includes `screenshot_path` and `log_path`.
+
+Automation retry for a failed task:
+
+```powershell
+Invoke-RestMethod -Method Post http://localhost:8000/automation/1/retry
+```
+
+Phase 3 acceptance criteria:
+- The mock platform exposes login, task creation, success, and status pages.
+- Mock page selectors use `data-testid`.
+- Playwright submits a `COPY_GENERATED` task to the mock platform.
+- Successful submission moves the task to `SUBMITTED` and saves `platform_job_id`.
+- Failed submission moves the task to `FAILED` and saves error, screenshot path, and log path.
 
 ## Suggested Git Safety Net
 

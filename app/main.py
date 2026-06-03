@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 
+from app.api.automation import router as automation_router
 from app.api.copywriting import router as copywriting_router
 from app.api.tasks import router as tasks_router
 from app.config import settings
@@ -21,6 +22,7 @@ def create_app() -> FastAPI:
 
     app.include_router(tasks_router)
     app.include_router(copywriting_router)
+    app.include_router(automation_router)
     return app
 
 

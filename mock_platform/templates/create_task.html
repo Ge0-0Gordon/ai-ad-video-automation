@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Create Mock Editing Task</title>
+    <style>
+      body { font-family: Arial, sans-serif; max-width: 840px; margin: 32px auto; line-height: 1.5; }
+      label { display: block; margin: 14px 0 6px; font-weight: 700; }
+      input, textarea, button { box-sizing: border-box; font: inherit; padding: 10px; width: 100%; }
+      textarea { min-height: 88px; resize: vertical; }
+      button { margin-top: 20px; cursor: pointer; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1 data-testid="create-task-heading">Create Video Task</h1>
+      <form method="post" action="/tasks">
+        <label for="video_path">Video path</label>
+        <input id="video_path" name="video_path" data-testid="video-path-input">
+
+        <label for="brand_name">Brand name</label>
+        <input id="brand_name" name="brand_name" data-testid="brand-name-input">
+
+        <label for="platform">Platform</label>
+        <input id="platform" name="platform" data-testid="platform-input">
+
+        <label for="template_id">Template ID</label>
+        <input id="template_id" name="template_id" data-testid="template-id-input">
+
+        <label for="title">Title</label>
+        <input id="title" name="title" data-testid="title-input">
+
+        <label for="marketing_copy">Marketing copy</label>
+        <textarea id="marketing_copy" name="marketing_copy" data-testid="marketing-copy-input"></textarea>
+
+        <label for="voiceover_script">Voiceover script</label>
+        <textarea id="voiceover_script" name="voiceover_script" data-testid="voiceover-script-input"></textarea>
+
+        <button type="submit" data-testid="create-task-submit">Submit task</button>
+      </form>
+    </main>
+  </body>
+</html>
