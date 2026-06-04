@@ -8,7 +8,9 @@ dependencies = [
     "langchain-core",
     "langchain-openai",
     "playwright",
+    "requests",
     "sqlmodel",
+    "streamlit",
     "uvicorn",
     "python-multipart",
 ]
@@ -17,6 +19,13 @@ dependencies = [
 dev = [
     "pytest",
 ]
+
+[tool.setuptools.packages.find]
+include = ["app*", "mock_platform*"]
+exclude = ["artifacts*", "dashboard*", "docs*", "sample_data*", "tests*"]
+
+[tool.setuptools.package-data]
+mock_platform = ["templates/*.html"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

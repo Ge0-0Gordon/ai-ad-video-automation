@@ -1,0 +1,1 @@
+"""Mock editing platform package."""

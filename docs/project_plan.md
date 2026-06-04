@@ -33,7 +33,7 @@ CSV 导入任务
 - [x] ~~使用 Python Playwright 操作本地 mock 剪辑平台。~~
 - [x] ~~使用 FastAPI 提供自动化提交、自动化重试接口。~~
 - [x] ~~使用 SQLite + SQLModel 保存自动化运行记录、截图路径、日志路径。~~
-- [ ] 使用 Streamlit Dashboard 调用 FastAPI API 展示和触发任务流程。
+- [x] ~~使用 Streamlit Dashboard 调用 FastAPI API 展示和触发任务流程。~~
 - [x] ~~pytest 第一版覆盖 `import_service`、copy schema、`task_state`。~~
 - [x] ~~pytest Phase 2 覆盖 copy service 成功、失败和真实 provider 不 fallback。~~
 
@@ -46,7 +46,7 @@ CSV 导入任务
 - [x] ~~`RETRYING` 长期状态。~~
 - [x] ~~Celery / Redis / 分布式队列。~~
 - [x] ~~多用户、权限系统、复杂模板管理。~~
-- [ ] Playwright e2e pytest 可作为 Phase 4 optional，不阻塞 MVP。
+- [x] ~~Playwright e2e pytest 可作为 Phase 4 optional，不阻塞 MVP。~~
 
 ## 3. 推荐架构
 
@@ -55,7 +55,7 @@ CSV 导入任务
 - [x] ~~`LLM Copy Service`：LangChain prompt 流程，Pydantic 结构化输出校验。~~
 - [x] ~~`Playwright Automation Service`：模拟人工登录 mock 平台、填写表单、选择模板、提交任务。~~
 - [x] ~~`Mock Platform`：本地 FastAPI + HTML 页面，模拟第三方自动剪辑平台。~~
-- [ ] `Streamlit Dashboard`：只通过 FastAPI API 读写任务，不直接访问数据库。
+- [x] ~~`Streamlit Dashboard`：只通过 FastAPI API 读写任务，不直接访问数据库。~~
 - [x] ~~`pytest`：优先覆盖纯业务逻辑、schema 校验和状态流转。~~
 
 默认服务：
@@ -127,7 +127,7 @@ ai-ad-video-automation/
 
 - [x] ~~Phase 1 / Phase 2 所需的 `app/`、`tests/`、`sample_data/`、`artifacts/`、`docs/` 已建立。~~
 - [x] ~~`mock_platform/` 目录存在，并已实现 Phase 3 页面和服务。~~
-- [ ] `dashboard/` 目录存在，但 Phase 4 页面尚未实现。
+- [x] ~~`dashboard/` 目录存在，并已实现 Phase 4 页面。~~
 
 ## 5. 数据库表设计
 
@@ -212,7 +212,7 @@ FAILED
 - [x] ~~Playwright 操作 mock 平台完成登录、填写表单、选择模板、提交。~~
 - [x] ~~提交成功后保存 `platform_job_id`，任务进入 `SUBMITTED`。~~
 - [x] ~~自动化失败后保存错误、截图路径、日志路径，任务进入 `FAILED`。~~
-- [ ] Dashboard 展示任务状态、生成文案、失败原因、截图路径、日志路径和重试入口。
+- [x] ~~Dashboard 展示任务状态、生成文案、失败原因、截图路径、日志路径和重试入口。~~
 
 ## 8. 开发阶段与验收标准
 
@@ -265,17 +265,17 @@ FAILED
 
 ### Phase 4：Dashboard 和演示打磨
 
-- [ ] Streamlit 只通过 FastAPI API 操作任务。
-- [ ] 支持 CSV 上传、任务列表、任务详情、生成文案、自动提交、重试失败任务。
-- [ ] README 补充运行命令、架构说明和面试演示脚本。
-- [ ] optional：增加 Playwright e2e pytest，不阻塞 MVP。
+- [x] ~~Streamlit 只通过 FastAPI API 操作任务。~~
+- [x] ~~支持 CSV 上传、任务列表、任务详情、生成文案、自动提交、重试失败任务。~~
+- [x] ~~README 补充运行命令、架构说明和面试演示脚本。~~
+- [x] ~~optional：增加 Playwright e2e pytest，不阻塞 MVP。~~
 
 验收标准：
 
-- [ ] 可以从 Dashboard 完成完整闭环。
-- [ ] 面试演示可以在 3 到 5 分钟内讲清楚。
-- [ ] 核心 pytest 全部通过。
-- [ ] Playwright e2e 若暂不实现，README 明确说明手动验证步骤。
+- [x] ~~可以从 Dashboard 完成完整闭环。~~
+- [x] ~~面试演示可以在 3 到 5 分钟内讲清楚。~~
+- [x] ~~核心 pytest 全部通过。~~
+- [x] ~~Playwright e2e 若暂不实现，README 明确说明手动验证步骤。~~
 
 ## 9. 技术风险与简化方案
 
@@ -284,28 +284,28 @@ FAILED
 - [x] ~~Playwright 选择器脆弱：mock 页面统一使用 `data-testid`。~~
 - [x] ~~视频上传复杂：MVP 只模拟视频路径上传，不处理真实视频内容。~~
 - [x] ~~后台任务复杂：第一版同步执行或使用 FastAPI `BackgroundTasks`，不引入 Celery。~~
-- [ ] Dashboard 状态不一致：Dashboard 只调用 API，不直接读写数据库。
+- [x] ~~Dashboard 状态不一致：Dashboard 只调用 API，不直接读写数据库。~~
 - [x] ~~Windows 路径兼容：代码中统一倾向使用 `pathlib.Path`。~~
-- [ ] 日志过重：第一版日志写到文件路径即可，不需要复杂日志检索系统。
+- [x] ~~日志过重：第一版日志写到文件路径即可，不需要复杂日志检索系统。~~
 
 ## 10. 面试展示方式
 
 推荐展示顺序：
 
-- [ ] 说明业务痛点：广告素材团队需要批量生成、填表、上传和追踪任务。
-- [ ] 展示系统架构：CSV 导入、LLM 文案生成、Pydantic 校验、Playwright 自动化、状态管理、Dashboard。
-- [ ] 导入 sample CSV，展示多条 `PENDING` 任务。
-- [ ] 触发文案生成，展示结构化广告标题、卖点、营销文案和口播脚本。
+- [x] ~~说明业务痛点：广告素材团队需要批量生成、填表、上传和追踪任务。~~
+- [x] ~~展示系统架构：CSV 导入、LLM 文案生成、Pydantic 校验、Playwright 自动化、状态管理、Dashboard。~~
+- [x] ~~导入 sample CSV，展示多条 `PENDING` 任务。~~
+- [x] ~~触发文案生成，展示结构化广告标题、卖点、营销文案和口播脚本。~~
 - [x] ~~触发自动提交，展示 Playwright 操作 mock 平台并返回 `platform_job_id`。~~
 - [x] ~~展示失败任务的错误原因、截图路径、日志路径和 `retry_count`。~~
-- [ ] 总结亮点：这个项目不是做视频模型，而是把 AI 生成能力、结构化可靠性、自动化执行和任务追踪做成一个完整业务闭环。
+- [x] ~~总结亮点：这个项目不是做视频模型，而是把 AI 生成能力、结构化可靠性、自动化执行和任务追踪做成一个完整业务闭环。~~
 
 ## 11. 当前进度快照
 
 - [x] ~~Phase 1 完成。~~
 - [x] ~~Phase 2 完成。~~
 - [x] ~~Phase 3 完成。~~
-- [ ] Phase 4 待开始。
+- [x] ~~Phase 4 完成。~~
 
 最近一次已知测试命令：
 
@@ -316,5 +316,5 @@ conda run -n learn-a pytest
 最近一次已知结果：
 
 ```text
-15 passed
+21 passed
 ```

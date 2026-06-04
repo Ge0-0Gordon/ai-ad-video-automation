@@ -5,6 +5,8 @@ __pycache__/
 .pytest_cache/
 pytest-cache-files-*/
 *.pyc
+*.egg-info/
+.tmp/
 artifacts/logs/*
 artifacts/screenshots/*
 !artifacts/logs/.gitkeep

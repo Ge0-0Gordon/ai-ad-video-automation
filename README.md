@@ -11,11 +11,12 @@ Current scope:
 - Mock and OpenAI-compatible copy generation flow.
 - Mock editing platform for Playwright submission.
 - FastAPI automation submission and retry endpoints.
-- Pytest coverage for CSV import, copy schema, copy service, task state, and automation state records.
+- Streamlit dashboard that drives the workflow through FastAPI only.
+- Pytest coverage for CSV import, copy schema, copy service, task state, automation state records, and dashboard read APIs.
 
 Not implemented yet:
-- Streamlit dashboard.
 - Excel import.
+- Playwright e2e pytest.
 
 ## Status Values
 
@@ -168,6 +169,58 @@ Phase 3 acceptance criteria:
 - Playwright submits a `COPY_GENERATED` task to the mock platform.
 - Successful submission moves the task to `SUBMITTED` and saves `platform_job_id`.
 - Failed submission moves the task to `FAILED` and saves error, screenshot path, and log path.
+
+## Phase 4 Dashboard and Demo
+
+Install dependencies:
+
+```powershell
+python -m pip install -e ".[dev]"
+python -m playwright install chromium
+```
+
+Start the backend:
+
+```powershell
+python -m uvicorn app.main:app --reload --port 8000
+```
+
+Start the mock editing platform:
+
+```powershell
+python -m uvicorn mock_platform.main:app --reload --port 8001
+```
+
+Start the dashboard:
+
+```powershell
+python -m streamlit run dashboard/Home.py
+```
+
+Manual Phase 1 -> Phase 2 -> Phase 3 -> Phase 4 test:
+
+1. Open the Streamlit URL printed by the dashboard command.
+2. Confirm the sidebar FastAPI URL is `http://localhost:8000`.
+3. Upload `sample_data/sample_tasks.csv` in the Import CSV panel.
+4. Select the first imported task and click `Generate copy`.
+5. Confirm the generated title, marketing copy, selling points, and voiceover script appear in the dashboard.
+6. Click `Submit automation`.
+7. Confirm task status changes to `SUBMITTED` and a `platform_job_id` appears.
+8. Confirm automation run details show `screenshot_path` and `log_path`.
+9. For failure demo, stop the mock platform, submit a `COPY_GENERATED` task, and confirm the dashboard shows `FAILED`, error text, and artifact paths.
+10. Restart the mock platform and use `Submit automation` on the failed task to retry.
+
+Interview demo script:
+
+1. Explain the business problem: ad teams need to batch create copy, fill platform forms, submit jobs, and track failures.
+2. Show the architecture: CSV import, mock/real LLM provider, Pydantic validation, Playwright automation, SQLite state, Streamlit dashboard.
+3. Import the sample CSV and point out `PENDING` tasks.
+4. Generate copy and show structured fields instead of free-form text.
+5. Submit automation and show Playwright returning `platform_job_id`.
+6. Show failure visibility: status, `error_message`, screenshot path, log path, and retry count.
+7. Summarize the project as an AI workflow integration MVP, not a video model.
+
+Playwright e2e pytest remains optional and is not required for the MVP. The repeatable manual dashboard flow above is the Phase 4 verification path.
 
 ## Suggested Git Safety Net
 
